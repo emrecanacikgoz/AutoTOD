@@ -60,7 +60,7 @@ def prepare_user_simulator(dialog, model):
     fisrt_user_utter = dialog['log'][0]['text']
 
     # LLM
-    assert model.startswith('text-davinci-') or model.startswith('gpt-3.5-')
+    assert model.startswith('text-davinci-') or model.startswith('gpt-3.5-'), "Invalid model, only support 'text-davinci-*', 'gpt-3.5-*'"
     if model.startswith('text-davinci-'):
         llm = OpenAI(
             model_name=model,
@@ -158,9 +158,12 @@ class User:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data_path', default='MultiWOZ_2.1/data.json')
+    parser.add_argument('--data_path', default='autotod-data/mwoz/origin/data.json')
+    parser.add_argument('--model', '-m', default='gpt-3.5-turbo')
     parser.add_argument('--id', '-i', default='random')
     args = parser.parse_args()
+
+    print(f'User Simulator with {args.model}', end='\n\n')
 
     with open(args.data_path) as f:
         data = json.load(f)
@@ -177,5 +180,5 @@ if __name__ == '__main__':
     print(f'User Goals:')
     print(goals, end='\n\n')
 
-    user_simulator, fisrt_user_utter = prepare_user_simulator(dialog)
+    user_simulator, fisrt_user_utter = prepare_user_simulator(dialog, args.model)
     run(user_simulator, fisrt_user_utter)
