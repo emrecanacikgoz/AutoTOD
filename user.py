@@ -44,7 +44,7 @@ AI Assistant: {{input}}
 User:'''
 
 
-def prepare_user_simulator(dialog, model):
+def prepare_user_simulator(dialog, model, template=TEMPLATE):
     # Prepare User Goals
     goals = prepare_goals_string(dialog['goal']['message'])
 
@@ -134,8 +134,8 @@ def run(user_simulator, fisrt_user_utter):
 
 class User:
 
-    def __init__(self, dialog, model):
-        self.user_simulator, self.fisrt_user_utter = prepare_user_simulator(dialog, model)
+    def __init__(self, dialog, model, template=TEMPLATE):
+        self.user_simulator, self.fisrt_user_utter = prepare_user_simulator(dialog, model, template)
         self.turn_idx = 0
 
     def __call__(self, sys_utter, callbacks=None):
@@ -180,5 +180,5 @@ if __name__ == '__main__':
     print(f'User Goals:')
     print(goals, end='\n\n')
 
-    user_simulator, fisrt_user_utter = prepare_user_simulator(dialog, args.model)
+    user_simulator, fisrt_user_utter = prepare_user_simulator(dialog, args.model, TEMPLATE)
     run(user_simulator, fisrt_user_utter)
