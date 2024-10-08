@@ -84,9 +84,9 @@ class AgentUtterTrimHandler:
             return utter
 
 
-def run(dialog, agent_type, model=None, agent_model=None, user_model=None, log_file=None, max_iter=15):
+def run(dialog, agent_type, model=None, agent_model=None, user_model=None, log_file=None, max_iter=15, user_simulator_prompt=None):
     final_user_model = user_model if user_model else model
-    user = User(dialog, model=final_user_model)
+    user = User(dialog, model=final_user_model, template=user_simulator_prompt)
 
     final_sys_model = agent_model if agent_model else model
     if agent_type == 'func':
