@@ -29,4 +29,8 @@ export OPENAI_API_KEY=<your api key>
 python user.py --data_path <path/to/data/autotod-data/mwoz/origin/data.json> --model gpt-3.5-turbo
 ```
 # Get User Simulator Evalution Results
-TODO
+To get evalution results, you should run:
+```bash
+python run_multiwoz.py --model gpt-3.5-turbo --user_simulator_prompt_path user_simulator_prompt.txt
+```
+Please modify **user_simulator_prompt.txt** for changing the user simulator prompt.
