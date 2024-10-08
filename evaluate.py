@@ -628,7 +628,7 @@ def show_eval_result(result):
             pprint(v)
 
 
-def evaluate_by_domain(domain, run_result, model='gpt-3.5-turbo-0301', verbose=True):
+def evaluate_by_domain(domain, run_result, model='gpt-3.5-turbo', verbose=True):
     assert run_result['goals'].get(domain)
     
     goal_dict = run_result['goals'][domain]
